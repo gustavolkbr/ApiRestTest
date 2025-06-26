@@ -1,6 +1,5 @@
 import { CollectionReference, getFirestore } from "firebase-admin/firestore";
 import { User } from "../models/user.model";
-import { userInfo } from "os";
 
 export class UserRepository {
 
@@ -33,7 +32,8 @@ export class UserRepository {
     }
 
     async save(user: User): Promise <void> {
-        await this.collection.add(user);
+        delete user.password;
+        await this.collection.add(user);  
     }
 
     async update (user:User) {
